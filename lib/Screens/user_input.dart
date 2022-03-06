@@ -29,7 +29,7 @@ class UserInput extends StatelessWidget {
                       color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(25)),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 15,bottom: 5,top: 5),
+                    padding: const EdgeInsets.only(left: 15, bottom: 5, top: 5),
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
