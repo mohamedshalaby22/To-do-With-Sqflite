@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:todo/Database/database.dart';
 import 'package:todo/Model/model.dart';
 import 'package:todo/Screens/todo_list.dart';
 import 'package:todo/Screens/user_input.dart';
-import 'package:todo/constans/constant.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,6 +28,41 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f2f2),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
+          BoxShadow(
+            color: Colors.purple.shade200,
+            offset: Offset(2, 2),
+            blurRadius: 15,
+            spreadRadius: 1,
+          ),
+          BoxShadow(
+            color: Colors.blue.shade100,
+            offset: Offset(-2, -2),
+            blurRadius: 15,
+            spreadRadius: 1,
+          )
+        ]),
+        child: FloatingActionButton(
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.blueAccent.shade200,
+          onPressed: () {
+            showModalBottomSheet(
+                shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(25))),
+                isScrollControlled: true,
+                context: context,
+                builder: (context) => UserInput(insertFunction: addTodo));
+          },
+          child: Icon(
+            Icons.add,
+            size: 30,
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: const Text(
           'ToDayDo',
@@ -37,8 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.only(top: 20, left: 20, right: 20, ),
+        padding: const EdgeInsets.only(
+          top: 20,
+          left: 20,
+          right: 20,
+        ),
         child: Column(
           children: [
             TodoListTile(
@@ -53,21 +89,28 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(8),
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(12)),
-          child: TextButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => UserInput(insertFunction: addTodo)));
-              },
-              child: const Text(
-                'Add Task',
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ))),
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(12)),
+          child: const Text(
+            '',
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          )),
     );
   }
 }
 /*
  
-
+Container(
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(8),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          child: TextButton(
+              onPressed: () {},
+              child: const Text(
+                'Add Task',
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ))),
  
 */

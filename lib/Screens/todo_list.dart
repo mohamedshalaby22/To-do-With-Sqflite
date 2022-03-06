@@ -17,6 +17,7 @@ class TodoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      
       child: FutureBuilder(
         future: db.getTodo(),
         initialData: const [],
@@ -42,6 +43,7 @@ class TodoListTile extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
+                physics: BouncingScrollPhysics(),
                   itemCount: dataLength,
                   itemBuilder: (context, index) => GestureDetector(
                         onTap: () {
